@@ -1,0 +1,784 @@
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<style>
+		div {
+			height: 20px;
+			width: 30px;
+			margin: 1px;
+			float: left;
+		}
+		a {
+			clear: left;
+			display: block;
+			margin-top: 1.5rem;
+		}
+		hr {
+			clear: left;
+			margin: 2rem 0 0;
+		}
+	</style>
+</head>
+<body>
+
+	<script src="distinct-colors.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js"></script>
+	<script src="https://medialab.github.io/iwanthue/js/libs/chroma.palette-gen.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
+
+	<script>
+
+/* helpers */
+function hr() {
+	$('body').append('<hr/>');
+}
+
+function title(link, descr) {
+	const text = 'Source' + (descr || '');
+	const html = $(`<a href="${link}">${text}</a>`);
+	$('body').append(html);
+}
+
+function div(color) {
+	const html = $('<div>').css('background-color', color).attr('title', color);
+	$('body').append(html);
+}
+
+/* implementations */
+
+const count = 30;
+
+
+hr();
+title('https://stackoverflow.com/a/7638362');
+for (let i = 0; i < count; ++i) {
+	const color = '#'+Math.random().toString(16).substr(2,6);
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/7419630');
+function rainbow(numOfSteps, step) {
+	// This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+	// Adam Cole, 2011-Sept-14
+	// HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+	var r, g, b;
+	var h = step / numOfSteps;
+	var i = ~~(h * 6);
+	var f = h * 6 - i;
+	var q = 1 - f;
+	switch(i % 6) {
+		case 0: r = 1; g = f; b = 0; break;
+		case 1: r = q; g = 1; b = 0; break;
+		case 2: r = 0; g = 1; b = f; break;
+		case 3: r = 0; g = q; b = 1; break;
+		case 4: r = f; g = 0; b = 1; break;
+		case 5: r = 1; g = 0; b = q; break;
+	}
+	var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+	return (c);
+}
+for (let i = 0; i < count; ++i) {
+	const color = rainbow(count, i);
+	div(color);
+}
+
+
+hr();
+function getRandColor(brightness) {
+	// Six levels of brightness from 0 to 5, 0 being the darkest
+	var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
+	var mix = [brightness*51, brightness*51, brightness*51]; //51 => 255/5
+	var mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x) { return Math.round(x/2.0)})
+	return "rgb(" + mixedrgb.join(",") + ")";
+}
+for (let br = 0; br < 6; ++br) {
+	title('https://stackoverflow.com/a/7352887', ' - brightness: ' + br);
+	for (let i = 0; i < count; ++i) {
+		const color = getRandColor(br);
+		div(color);
+	}
+}
+
+
+hr();
+function randomHsl(saturation, lightness) {
+	return 'hsla(' + (Math.random() * 360) + `, ${saturation}%, ${lightness}%, 1)`;
+}
+const hslarr = [[100,50], [100,70], [80,50], [80,70], [60,50], [60,40]];
+for (let hsl of hslarr) {
+	title('https://stackoverflow.com/a/25873123', ` - S=${hsl[0]}%, L=${hsl[1]}%`);
+	for (let i = 0; i < count; ++i) {
+		const color = randomHsl(hsl[0], hsl[1]);
+		div(color);
+	}
+}
+
+
+hr();
+title('https://stackoverflow.com/a/2629539');
+function get_random_color() {
+	var letters = '6789ABCD'.split('');
+	var color = '#';
+	for (var i=0; i<3; i++ ) {
+		color += letters[Math.floor(Math.random() * letters.length)];
+	}
+	return color;
+}
+for (let i = 0; i < count; ++i) {
+	const color = get_random_color();
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/3109564');
+function generateColor(ranges) {
+	if (!ranges) {
+		ranges = [
+			[150,256],
+			[0, 190],
+			[0, 30]
+		];
+	}
+	var g = function() {
+		//select random range and remove
+		var range = ranges.splice(Math.floor(Math.random()*ranges.length), 1)[0];
+		//pick a random number from within the range
+		return Math.floor(Math.random() * (range[1] - range[0])) + range[0];
+	}
+	return "rgb(" + g() + "," + g() + "," + g() +")";
+};
+for (let i = 0; i < count; ++i) {
+	const color = generateColor();
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/43815463');
+// adapted from
+// http://jsfiddle.net/Mottie/xcqpF/1/light/
+const rgb2hex = (rgb) => {
+	return (rgb && rgb.length === 3) ? "#" +
+		("0" + parseInt(rgb[0],10).toString(16)).slice(-2) +
+		("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+(		"0" + parseInt(rgb[2],10).toString(16)).slice(-2) : '';
+}
+// next two methods converted from Ruby to JS
+// soured from http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
+// # HSV values in [0..1[
+// # returns [r, g, b] values from 0 to 255
+const hsv_to_rgb = (h, s, v) => {
+	const h_i = Math.floor(h*6)
+	const f = h*6 - h_i
+	const p = v * (1 - s)
+	const q = v * (1 - (f * s))
+	const t = v * (1 - (1 - f) * s)
+	let r, g, b
+	switch(h_i) {
+		case(0):
+			[r, g, b] = [v, t, p]
+			break
+		case(1):
+			[r, g, b] = [q, v, p]
+			break
+		case(2):
+			[r, g, b] = [p, v, t]
+			break
+		case(3):
+			[r, g, b] = [p, q, v]
+			break
+		case(4):
+			[r, g, b] = [t, p, v]
+			break
+		case(5):
+			[r, g, b] = [v, p, q]
+			break
+	}
+	return [Math.floor(r * 256), Math.floor(g * 256), Math.floor(b * 256)]
+}
+// # use golden ratio
+const golden_ratio_conjugate = 0.618033988749895
+let h = Math.random() // # use random start value
+const gen_hex = (numberOfColors) => {
+	const colorArray = []
+	while (numberOfColors > 0) {
+		h += golden_ratio_conjugate
+		h %= 1
+		colorArray.push(rgb2hex(hsv_to_rgb(h, 0.99, 0.99)))
+		numberOfColors -= 1
+	}
+	// console.log(colorArray)
+	return colorArray
+}
+const gh_colors = gen_hex(count);
+for (let i = 0; i < count; ++i) {
+	const color = gh_colors[i];
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/30719083');
+/**
+ * Generates a random palette of HSV colors.	Attempts to pick colors
+ * that are as distinct as possible within the desired HSV range.
+ *
+ * @param {number}		[options.numColors=10] - the number of colors to generate
+ * @param {number[]}	[options.hRange=[0,1]] - the maximum range for generated hue
+ * @param {number[]}	[options.sRange=[0,1]] - the maximum range for generated saturation
+ * @param {number[]}	[options.vRange=[0,1]] - the maximum range for generated value
+ * @param {number[][]}[options.exclude=[[0,0,0],[0,0,1]]] - colors to exclude
+ * 
+ * @returns {number[][]} an array of HSV colors (each HSV color 
+ * is a [hue, saturation, value] array)
+ */
+function randomHSVPalette(options) {
+	function random(min, max) {
+		return min + Math.random() * (max - min);
+	} 
+
+	function HSVtoXYZ(hsv) {
+		var h = hsv[0];
+		var s = hsv[1];
+		var v = hsv[2];
+		var angle = h * Math.PI * 2;
+		return [Math.sin(angle) * s * v,
+						Math.cos(angle) * s * v,
+						v];
+	}
+
+	function distSq(a, b) {
+		var dx = a[0] - b[0];
+		var dy = a[1] - b[1];
+		var dz = a[2] - b[2];
+		return dx * dx + dy * dy + dz * dz;
+	}
+
+	if (!options) {
+		options = {};
+	}
+
+	var numColors = options.numColors || 10;
+	var hRange = options.hRange || [0, 1];
+	var sRange = options.sRange || [0, 1];
+	var vRange = options.vRange || [0, 1];
+	var exclude = options.exclude || [[0, 0, 0], [0, 0, 1]];
+
+	var points = exclude.map(HSVtoXYZ);
+	var result = [];
+
+	while (result.length < numColors) {
+		var bestHSV;
+		var bestXYZ;
+		var bestDist = 0;
+		for (var i = 0; i < 20; i++) {
+			var hsv = [random(hRange[0], hRange[1]), random(sRange[0], sRange[1]), random(vRange[0], vRange[1])];
+			var xyz = HSVtoXYZ(hsv);
+			var minDist = 10;
+			points.forEach(function(point) {
+				minDist = Math.min(minDist, distSq(xyz, point));
+			});
+			if (minDist > bestDist) {
+				bestHSV = hsv;
+				bestXYZ = xyz;
+				bestDist = minDist;
+			}
+		}
+		points.push(bestXYZ);
+		result.push(bestHSV);
+	}
+
+	return result;
+}
+function HSVtoRGB(hsv) {
+	var h = hsv[0];
+	var s = hsv[1];
+	var v = hsv[2];
+
+	var i = ~~(h * 6);
+	var f = h * 6 - i;
+	var p = v * (1 - s);
+	var q = v * (1 - f * s);
+	var t = v * (1 - (1 - f) * s);
+	v = ~~(255 * v);
+	p = ~~(255 * p);
+	q = ~~(255 * q); 
+	t = ~~(255 * t);
+	switch (i % 6) {
+		case 0: return [v, t, p];
+		case 1: return [q, v, p];
+		case 2: return [p, v, t];
+		case 3: return [p, q, v];
+		case 4: return [t, p, v];
+		case 5: return [v, p, q];
+	}
+}
+function RGBtoCSS(rgb) {
+	var r = rgb[0];
+	var g = rgb[1];
+	var b = rgb[2];
+	var rgb = (r << 16) + (g << 8) + b;
+	return '#' + ('000000' + rgb.toString(16)).slice(-6);
+}
+const rh_palette = randomHSVPalette({
+	numColors: count,
+	hRange: [0.333, 0.666],
+	sRange: [0, 0.8]
+});
+for (let i = 0; i < count; ++i) {
+	const color = RGBtoCSS(HSVtoRGB(rh_palette[i]));
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/10014969');
+Colors = {};
+Colors.names = {
+	aqua: "#00ffff",
+	azure: "#f0ffff",
+	beige: "#f5f5dc",
+	black: "#000000",
+	blue: "#0000ff",
+	brown: "#a52a2a",
+	cyan: "#00ffff",
+	darkblue: "#00008b",
+	darkcyan: "#008b8b",
+	darkgrey: "#a9a9a9",
+	darkgreen: "#006400",
+	darkkhaki: "#bdb76b",
+	darkmagenta: "#8b008b",
+	darkolivegreen: "#556b2f",
+	darkorange: "#ff8c00",
+	darkorchid: "#9932cc",
+	darkred: "#8b0000",
+	darksalmon: "#e9967a",
+	darkviolet: "#9400d3",
+	fuchsia: "#ff00ff",
+	gold: "#ffd700",
+	green: "#008000",
+	indigo: "#4b0082",
+	khaki: "#f0e68c",
+	lightblue: "#add8e6",
+	lightcyan: "#e0ffff",
+	lightgreen: "#90ee90",
+	lightgrey: "#d3d3d3",
+	lightpink: "#ffb6c1",
+	lightyellow: "#ffffe0",
+	lime: "#00ff00",
+	magenta: "#ff00ff",
+	maroon: "#800000",
+	navy: "#000080",
+	olive: "#808000",
+	orange: "#ffa500",
+	pink: "#ffc0cb",
+	purple: "#800080",
+	violet: "#800080",
+	red: "#ff0000",
+	silver: "#c0c0c0",
+	white: "#ffffff",
+	yellow: "#ffff00"
+};
+Colors.random = function() {
+	var result;
+	var count = 0;
+	for (var prop in this.names)
+		if (Math.random() < 1/++count)
+			result = prop;
+	return result;
+};
+for (let i = 0; i < count; ++i) {
+	const color = Colors.random();
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/31817723');
+const generateRandomColors = function(number){
+/*
+This generates colors using the following algorithm:
+Each time you create a color:
+	Create a random, but attractive, color{
+		Red, Green, and Blue are set to random luminosity.
+		One random value is reduced significantly to prevent grayscale.
+		Another is increased by a random amount up to 100%.
+		They are mapped to a random total luminosity in a medium-high range (bright but not white).
+	}
+	Check for similarity to other colors{
+		Check if the colors are very close together in value.
+		Check if the colors are of similar hue and saturation.
+		Check if the colors are of similar luminosity.
+		If the random color is too similar to another,
+		and there is still a good opportunity to change it:
+			Change the hue of the random color and try again.
+	}
+	Output array of all colors generated
+*/
+	//if we've passed preloaded colors and they're in hex format
+	if(typeof(arguments[1])!='undefined'&&arguments[1].constructor==Array&&arguments[1][0]&&arguments[1][0].constructor!=Array){
+		for(var i=0;i<arguments[1].length;i++){ //for all the passed colors
+			var vals = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(arguments[1][i]); //get RGB values
+			arguments[1][i]=[parseInt(vals[1], 16),parseInt(vals[2], 16),parseInt(vals[3], 16)]; //and convert them to base 10
+		}
+	}
+	var loadedColors=typeof(arguments[1])=='undefined'?[]:arguments[1],//predefine colors in the set
+		number=number+loadedColors.length,//reset number to include the colors already passed
+		lastLoadedReduction=Math.floor(Math.random()*3),//set a random value to be the first to decrease
+		rgbToHSL=function(rgb){//converts [r,g,b] into [h,s,l]
+			var r=rgb[0],g=rgb[1],b=rgb[2],cMax=Math.max(r,g,b),cMin=Math.min(r,g,b),delta=cMax-cMin,l=(cMax+cMin)/2,h=0,s=0;if(delta==0)h=0;else if(cMax==r)h=60*((g-b)/delta%6);else if(cMax==g)h=60*((b-r)/delta+2);else h=60*((r-g)/delta+4);if(delta==0)s=0;else s=delta/(1-Math.abs(2*l-1));return[h,s,l]
+		},hslToRGB=function(hsl){//converts [h,s,l] into [r,g,b]
+			var h=hsl[0],s=hsl[1],l=hsl[2],c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs(h/60%2-1)),m=l-c/2,r,g,b;if(h<60){r=c;g=x;b=0}else if(h<120){r=x;g=c;b=0}else if(h<180){r=0;g=c;b=x}else if(h<240){r=0;g=x;b=c}else if(h<300){r=x;g=0;b=c}else{r=c;g=0;b=x}return[r,g,b]
+		},shiftHue=function(rgb,degree){//shifts [r,g,b] by a number of degrees
+			var hsl=rgbToHSL(rgb); //convert to hue/saturation/luminosity to modify hue
+			hsl[0]+=degree; //increment the hue
+			if(hsl[0]>360){ //if it's too high
+				hsl[0]-=360 //decrease it mod 360
+			}else if(hsl[0]<0){ //if it's too low
+				hsl[0]+=360 //increase it mod 360
+			}
+			return hslToRGB(hsl); //convert back to rgb
+		},differenceRecursions={//stores recursion data, so if all else fails we can use one of the hues already generated
+			differences:[],//used to calculate the most distant hue
+			values:[]//used to store the actual colors
+		},fixDifference=function(color){//recursively asserts that the current color is distinctive
+			if(differenceRecursions.values.length>23){//first, check if this is the 25th recursion or higher. (can we try any more unique hues?)
+				//if so, get the biggest value in differences that we have and its corresponding value
+				var ret=differenceRecursions.values[differenceRecursions.differences.indexOf(Math.max.apply(null,differenceRecursions.differences))];
+				differenceRecursions={differences:[],values:[]}; //then reset the recursions array, because we're done now
+				return ret; //and then return up the recursion chain
+			} //okay, so we still have some hues to try.
+			var differences=[]; //an array of the "difference" numbers we're going to generate.
+			for(var i=0;i<loadedColors.length;i++){ //for all the colors we've generated so far
+				var difference=loadedColors[i].map(function(value,index){ //for each value (red,green,blue)
+					return Math.abs(value-color[index]) //replace it with the difference in that value between the two colors
+				}),sumFunction=function(sum,value){ //function for adding up arrays
+					return sum+value
+				},sumDifference=difference.reduce(sumFunction), //add up the difference array
+				loadedColorLuminosity=loadedColors[i].reduce(sumFunction), //get the total luminosity of the already generated color
+				currentColorLuminosity=color.reduce(sumFunction), //get the total luminosity of the current color
+				lumDifference=Math.abs(loadedColorLuminosity-currentColorLuminosity), //get the difference in luminosity between the two
+				//how close are these two colors to being the same luminosity and saturation?
+				differenceRange=Math.max.apply(null,difference)-Math.min.apply(null,difference),
+				luminosityFactor=50, //how much difference in luminosity the human eye should be able to detect easily
+				rangeFactor=75; //how much difference in luminosity and saturation the human eye should be able to dect easily
+				if(luminosityFactor/(lumDifference+1)*rangeFactor/(differenceRange+1)>1){ //if there's a problem with range or luminosity
+					//set the biggest difference for these colors to be whatever is most significant
+					differences.push(Math.min(differenceRange+lumDifference,sumDifference));
+				}
+				differences.push(sumDifference); //otherwise output the raw difference in RGB values
+			}
+			var breakdownAt=64, //if you're generating this many colors or more, don't try so hard to make unique hues, because you might fail.
+			breakdownFactor=25, //how much should additional colors decrease the acceptable difference
+			shiftByDegrees=15, //how many degrees of hue should we iterate through if this fails
+			acceptableDifference=250, //how much difference is unacceptable between colors
+			breakVal=loadedColors.length/number*(number-breakdownAt), //break down progressively (if it's the second color, you can still make it a unique hue)
+			totalDifference=Math.min.apply(null,differences); //get the color closest to the current color
+			if(totalDifference>acceptableDifference-(breakVal<0?0:breakVal)*breakdownFactor){ //if the current color is acceptable
+				differenceRecursions={differences:[],values:[]} //reset the recursions object, because we're done
+				return color; //and return that color
+			} //otherwise the current color is too much like another
+			//start by adding this recursion's data into the recursions object
+			differenceRecursions.differences.push(totalDifference);
+			differenceRecursions.values.push(color);
+			color=shiftHue(color,shiftByDegrees); //then increment the color's hue
+			return fixDifference(color); //and try again
+		},color=function(){ //generate a random color
+			var scale=function(x){ //maps [0,1] to [300,510]
+				return x*210+300 //(no brighter than #ff0 or #0ff or #f0f, but still pretty bright)
+			},randVal=function(){ //random value between 300 and 510
+				return Math.floor(scale(Math.random()))
+			},luminosity=randVal(), //random luminosity
+				red=randVal(), //random color values
+				green=randVal(), //these could be any random integer but we'll use the same function as for luminosity
+				blue=randVal(),
+				rescale, //we'll define this later
+				thisColor=[red,green,blue], //an array of the random values
+				/*
+				#ff0 and #9e0 are not the same colors, but they are on the same range of the spectrum, namely without blue.
+				Try to choose colors such that consecutive colors are on different ranges of the spectrum.
+				This shouldn't always happen, but it should happen more often then not.
+				Using a factor of 2.3, we'll only get the same range of spectrum 15% of the time.
+				*/
+				valueToReduce=Math.floor(lastLoadedReduction+1+Math.random()*2.3)%3, //which value to reduce
+				/*
+				Because 300 and 510 are fairly close in reference to zero,
+				increase one of the remaining values by some arbitrary percent betweeen 0% and 100%,
+				so that our remaining two values can be somewhat different.
+				*/
+				valueToIncrease=Math.floor(valueToIncrease+1+Math.random()*2)%3, //which value to increase (not the one we reduced)
+				increaseBy=Math.random()+1; //how much to increase it by
+			lastLoadedReduction=valueToReduce; //next time we make a color, try not to reduce the same one
+			thisColor[valueToReduce]=Math.floor(thisColor[valueToReduce]/16); //reduce one of the values
+			thisColor[valueToIncrease]=Math.ceil(thisColor[valueToIncrease]*increaseBy) //increase one of the values
+			rescale=function(x){ //now, rescale the random numbers so that our output color has the luminosity we want
+				return x*luminosity/thisColor.reduce(function(a,b){return a+b}) //sum red, green, and blue to get the total luminosity
+			};
+			thisColor=fixDifference(thisColor.map(function(a){return rescale(a)})); //fix the hue so that our color is recognizable
+			if(Math.max.apply(null,thisColor)>255){ //if any values are too large
+				rescale=function(x){ //rescale the numbers to legitimate hex values
+					return x*255/Math.max.apply(null,thisColor)
+				}
+				thisColor=thisColor.map(function(a){return rescale(a)});
+			}
+			return thisColor;
+		};
+	for(var i=loadedColors.length;i<number;i++){ //Start with our predefined colors or 0, and generate the correct number of colors.
+		loadedColors.push(color().map(function(value){ //for each new color
+			return Math.round(value) //round RGB values to integers
+		}));
+	}
+	//then, after you've made all your colors, convert them to hex codes and return them.
+	return loadedColors.map(function(color){
+		var hx=function(c){ //for each value
+			var h=c.toString(16);//then convert it to a hex code
+			return h.length<2?'0'+h:h//and assert that it's two digits
+		}
+		return "#"+hx(color[0])+hx(color[1])+hx(color[2]); //then return the hex code
+	});
+};
+const rc_colors = generateRandomColors(count);
+for (let i = 0; i < count; ++i) {
+	const color = rc_colors[i];
+	div(color);
+}
+
+
+hr();
+title('https://stackoverflow.com/a/10014550');
+function randomColorA() {
+	var allowed = "0369cf".split( '' ), s = "#";
+	while ( s.length < 4 ) {
+	   s += allowed.splice( Math.floor( ( Math.random() * allowed.length ) ), 1 );
+	}
+	return s;
+}
+for (let i = 0; i < count; ++i) {
+	const color = randomColorA();
+	div(color);
+}
+
+
+hr();
+function RGB2Color(r, g, b) {
+	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+}
+function byte2Hex(n) {
+	var nybHexString = "0123456789ABCDEF";
+	return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+}
+function makeColorGradient(frequency1, frequency2, frequency3, phase1, phase2, phase3, center, width, len) {
+	var colors = []
+	if(len == undefined)
+		len = 50;
+	if(center == undefined)
+		center = 128;
+	if(width == undefined)
+		width = 127;
+
+	for(var i = 0; i < len; ++i) {
+		var red = Math.sin(frequency1 * i + phase1) * width + center;
+		var grn = Math.sin(frequency2 * i + phase2) * width + center;
+		var blu = Math.sin(frequency3 * i + phase3) * width + center;
+		colors.push(RGB2Color(red, grn, blu));
+	}
+
+	return colors;
+}
+const grarr = [
+	[.3, .3, .3,  0, 2, 4,  128, 127],
+	[.3, .3, .3,  0, 2, 4,  200, 55],
+	[.2, .2, .2,  0, 2, 4,  128, 127],
+	[.15, .35, .55,  0, 2, 4,  128, 127],
+	[2.4, 2.4, 2.4,  0, 2, 4,  128, 127],
+	[1.66, 2.66, 3.66,  0, 2, 0,  128, 127],
+	[.2, .2, .2,  0, 1, 0,  128, 127],
+	[.2, .2, .2,  0, 1, 1,  128, 127],
+];
+for (let gr of grarr) {
+	title('https://stackoverflow.com/a/10019872', ` - freq: ${gr[0]} ${gr[1]} ${gr[2]}, phase: ${gr[3]} ${gr[4]} ${gr[5]}, center: ${gr[6]}, width: ${gr[7]}`);
+	const colors = makeColorGradient(gr[0], gr[1], gr[2], gr[3], gr[4], gr[5], gr[6], gr[7], count);
+
+	for (let i = 0; i < count; ++i) {
+		const color = colors[i];
+		div(color);
+	}
+}
+
+
+hr();
+title('https://stackoverflow.com/a/52471602');
+function switchColors() {
+	var r, g, b, rg, gb, rb;
+	var range = 255; // controls the range of r,g,b you would like
+	//reduce the range if you want more darker colors
+	var sep = range / 4; // controls the minimum separation for saturation
+	//note- keep sep < range/3 otherwise may crash browser due to performance
+	//reduce the sep if you do not mind pastel colors
+	//generate r,g,b, values as long as any difference is < separation
+	do {
+		r = Math.floor(Math.random() * range);
+		g = Math.floor(Math.random() * range);
+		b = Math.floor(Math.random() * range);
+
+		rg = Math.abs(r - g);
+		gb = Math.abs(g - b);
+		rb = Math.abs(r - b);
+	} while (rg < sep || gb < sep || rb < sep);
+
+	//convert the rgb to hex
+
+	function rgbtohex(rgb) {
+		var first, second; // makes the two hex code for each rgb value
+
+		first = Math.floor(rgb / 16); //get first unit of hex
+		second = rgb % 16; //get second unit of hex
+		// convert to string with hex base 16
+		first = first.toString(16);
+		second = second.toString(16);
+		//concatenate the two units of the hex
+		var rgbtohex = first + second;
+		//return the two unit hex code for the r,g,b value
+		return rgbtohex;
+	}
+
+	//convert the r,g,b numbers to hex code by calling the rgbto hex function
+	var r_str = rgbtohex(r),
+		g_str = rgbtohex(g),
+		b_str = rgbtohex(b);
+	//concatenate the final string for the output
+	var final = '#' + r_str + g_str + b_str;
+
+	//output random color
+	return final;
+}
+for (let i = 0; i < count; ++i) {
+	const color = switchColors();
+	div(color);
+}
+
+
+hr();
+/* include: distinct-colors.min.js */
+const dcarr = [
+	[0, 100, 0, 100],
+	[0, 40, 60, 100],
+	[70, 100, 0, 100],
+	[0, 100, 0, 60],
+	[0, 100, 70, 100]
+];
+for (let dc of dcarr) {
+	title('https://github.com/internalfx/distinct-colors', ` - chroma: ${dc[0]}-${dc[1]}, light: ${dc[2]}-${dc[3]}`);
+	const colors = new DistinctColors({
+		count,
+		chromaMin: dc[0],
+		chromaMax: dc[1],
+		lightMin: dc[2],
+		lightMax: dc[3]
+	});
+
+	for (let i = 0; i < count; ++i) {
+		const color = colors[i];
+		div(color);
+	}
+}
+
+
+hr();
+/* include: https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js */
+/* include: https://medialab.github.io/iwanthue/js/libs/chroma.palette-gen.js */
+const iwharr = [
+	[0, 100, 0, 100, false],
+	[0, 40, 60, 100, false],
+	[70, 100, 0, 100, false],
+	[0, 100, 0, 60, false],
+	[0, 100, 70, 100, false],
+
+	[0, 100, 0, 100, true],
+	[0, 40, 60, 100, true],
+	[70, 100, 0, 100, true],
+	[0, 100, 0, 60, true],
+	[0, 100, 70, 100, true]
+];
+for (let iw of iwharr) {
+	title('https://medialab.github.io/iwanthue/', ` - chroma: ${iw[0]}-${iw[1]}, light: ${iw[2]}-${iw[3]}, fv: ${iw[4]}`);
+	let pg_colors = paletteGenerator.generate(
+		count, // Colors
+		function(color) { // This function filters valid colors
+			var hcl = color.hcl();
+			return hcl[0]>=0 && hcl[0]<=360
+				&& hcl[1]>=iw[0] && hcl[1]<=iw[1]
+				&& hcl[2]>=iw[2] && hcl[2]<=iw[3];
+		},
+		iw[4], // Using Force Vector instead of k-Means
+		50, // Steps (quality)
+		false, // Ultra precision
+		'Default' // Color distance type (colorblindness)
+	);
+	// Sort colors by differenciation first
+	pg_colors = paletteGenerator.diffSort(pg_colors, 'Default');
+	for (let i = 0; i < count; ++i) {
+		const color = pg_colors[i];
+		div(color);
+	}
+}
+
+
+hr();
+function randomColorB(brightness){
+	function randomChannel(brightness){
+		var r = 255-brightness;
+		var n = 0|((Math.random() * r) + brightness);
+		var s = n.toString(16);
+		return (s.length==1) ? '0'+s : s;
+	}
+	return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
+}
+const brightnesses = [0, 60, 128, 200];
+for (let brightness of brightnesses) {
+	title('https://stackoverflow.com/a/17373688', ` - ${brightness}`);
+	for (let i = 0; i < count; ++i) {
+		const color = randomColorB(brightness);
+		div(color);
+	}
+}
+
+
+hr();
+const dmarr = [
+	['random', undefined],
+	['random', 'bright'],
+	['random', 'light'],
+	['random', 'dark'],
+
+	['monochrome', undefined],
+	['red', undefined],
+	['green', undefined],
+	['blue', undefined]
+];
+/* include https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js */
+for (let dm of dmarr) {
+	title('https://github.com/davidmerfield/randomColor', ` - hue: ${dm[0]}, luminosity: ${dm[1]}`);
+	const dm_colors = randomColor({
+		count,
+		hue: dm[0],
+		luminosity: dm[1]
+	});
+	for (let i = 0; i < count; ++i) {
+		const color = dm_colors[i];
+		div(color);
+	}
+}
+
+hr();
+
+
+	</script>
+
+</body>
+</html>
