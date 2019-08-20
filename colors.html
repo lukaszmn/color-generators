@@ -1,27 +1,12 @@
 <html>
 <head>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<style>
-		div {
-			height: 20px;
-			width: 30px;
-			margin: 1px;
-			float: left;
-		}
-		a {
-			clear: left;
-			display: block;
-			margin-top: 1.5rem;
-		}
-		hr {
-			clear: left;
-			margin: 2rem 0 0;
-		}
-	</style>
+	<script src="lib/jquery-latest.js"></script>
+	<script src="helpers.js"></script>
+	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-	<script src="distinct-colors.min.js"></script>
+	<script src="lib/distinct-colors.min.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js"></script>
 	<script src="https://medialab.github.io/iwanthue/js/libs/chroma.palette-gen.js"></script>
@@ -29,24 +14,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
 
 	<script>
-
-/* helpers */
-function hr() {
-	$('body').append('<hr/>');
-}
-
-function title(link, descr) {
-	const text = 'Source' + (descr || '');
-	const html = $(`<a href="${link}">${text}</a>`);
-	$('body').append(html);
-}
-
-function div(color) {
-	const html = $('<div>').css('background-color', color).attr('title', color);
-	$('body').append(html);
-}
-
-/* implementations */
 
 const count = 30;
 

@@ -1,0 +1,17 @@
+div {
+	height: 20px;
+	width: 30px;
+	margin: 1px;
+	float: left;
+}
+
+a {
+	clear: left;
+	display: block;
+	margin-top: 1.5rem;
+}
+
+hr {
+	clear: left;
+	margin: 2rem 0 0;
+}
