@@ -55,6 +55,7 @@ for (let i = 0; i < count; ++i) {
 
 
 hr();
+title('https://stackoverflow.com/a/7352887');
 function getRandColor(brightness) {
 	// Six levels of brightness from 0 to 5, 0 being the darkest
 	var rgb = [Math.random() * 256, Math.random() * 256, Math.random() * 256];
@@ -63,7 +64,7 @@ function getRandColor(brightness) {
 	return "rgb(" + mixedrgb.join(",") + ")";
 }
 for (let br = 0; br < 6; ++br) {
-	title('https://stackoverflow.com/a/7352887', ' - brightness: ' + br);
+	subtitle('brightness: ' + br);
 	for (let i = 0; i < count; ++i) {
 		const color = getRandColor(br);
 		div(color);
@@ -72,12 +73,13 @@ for (let br = 0; br < 6; ++br) {
 
 
 hr();
+title('https://stackoverflow.com/a/25873123');
 function randomHsl(saturation, lightness) {
 	return 'hsla(' + (Math.random() * 360) + `, ${saturation}%, ${lightness}%, 1)`;
 }
 const hslarr = [[100,50], [100,70], [80,50], [80,70], [60,50], [60,40]];
 for (let hsl of hslarr) {
-	title('https://stackoverflow.com/a/25873123', ` - S=${hsl[0]}%, L=${hsl[1]}%`);
+	subtitle(`S=${hsl[0]}%, L=${hsl[1]}%`);
 	for (let i = 0; i < count; ++i) {
 		const color = randomHsl(hsl[0], hsl[1]);
 		div(color);
@@ -532,6 +534,7 @@ for (let i = 0; i < count; ++i) {
 
 
 hr();
+title('https://stackoverflow.com/a/10019872');
 function RGB2Color(r, g, b) {
 	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
 }
@@ -568,7 +571,7 @@ const grarr = [
 	[.2, .2, .2,  0, 1, 1,  128, 127],
 ];
 for (let gr of grarr) {
-	title('https://stackoverflow.com/a/10019872', ` - freq: ${gr[0]} ${gr[1]} ${gr[2]}, phase: ${gr[3]} ${gr[4]} ${gr[5]}, center: ${gr[6]}, width: ${gr[7]}`);
+	subtitle(`freq: ${gr[0]} ${gr[1]} ${gr[2]}, phase: ${gr[3]} ${gr[4]} ${gr[5]}, center: ${gr[6]}, width: ${gr[7]}`);
 	const colors = makeColorGradient(gr[0], gr[1], gr[2], gr[3], gr[4], gr[5], gr[6], gr[7], count);
 
 	for (let i = 0; i < count; ++i) {
@@ -631,6 +634,7 @@ for (let i = 0; i < count; ++i) {
 
 
 hr();
+title('https://github.com/internalfx/distinct-colors');
 /* include: distinct-colors.min.js */
 const dcarr = [
 	[0, 100, 0, 100],
@@ -640,7 +644,7 @@ const dcarr = [
 	[0, 100, 70, 100]
 ];
 for (let dc of dcarr) {
-	title('https://github.com/internalfx/distinct-colors', ` - chroma: ${dc[0]}-${dc[1]}, light: ${dc[2]}-${dc[3]}`);
+	subtitle(`chroma: ${dc[0]}-${dc[1]}, light: ${dc[2]}-${dc[3]}`);
 	const colors = new DistinctColors({
 		count,
 		chromaMin: dc[0],
@@ -657,6 +661,7 @@ for (let dc of dcarr) {
 
 
 hr();
+title('https://medialab.github.io/iwanthue/');
 /* include: https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js */
 /* include: https://medialab.github.io/iwanthue/js/libs/chroma.palette-gen.js */
 const iwharr = [
@@ -673,7 +678,7 @@ const iwharr = [
 	[0, 100, 70, 100, true]
 ];
 for (let iw of iwharr) {
-	title('https://medialab.github.io/iwanthue/', ` - chroma: ${iw[0]}-${iw[1]}, light: ${iw[2]}-${iw[3]}, fv: ${iw[4]}`);
+	subtitle(`chroma: ${iw[0]}-${iw[1]}, light: ${iw[2]}-${iw[3]}, fv: ${iw[4]}`);
 	let pg_colors = paletteGenerator.generate(
 		count, // Colors
 		function(color) { // This function filters valid colors
@@ -697,6 +702,7 @@ for (let iw of iwharr) {
 
 
 hr();
+title('https://stackoverflow.com/a/17373688');
 function randomColorB(brightness){
 	function randomChannel(brightness){
 		var r = 255-brightness;
@@ -708,7 +714,7 @@ function randomColorB(brightness){
 }
 const brightnesses = [0, 60, 128, 200];
 for (let brightness of brightnesses) {
-	title('https://stackoverflow.com/a/17373688', ` - ${brightness}`);
+	subtitle(`Brightness: ${brightness}`);
 	for (let i = 0; i < count; ++i) {
 		const color = randomColorB(brightness);
 		div(color);
@@ -717,6 +723,7 @@ for (let brightness of brightnesses) {
 
 
 hr();
+title('https://github.com/davidmerfield/randomColor');
 const dmarr = [
 	['random', undefined],
 	['random', 'bright'],
@@ -730,7 +737,7 @@ const dmarr = [
 ];
 /* include https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js */
 for (let dm of dmarr) {
-	title('https://github.com/davidmerfield/randomColor', ` - hue: ${dm[0]}, luminosity: ${dm[1]}`);
+	subtitle(`hue: ${dm[0]}, luminosity: ${dm[1]}`);
 	const dm_colors = randomColor({
 		count,
 		hue: dm[0],
