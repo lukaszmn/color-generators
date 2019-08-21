@@ -52,10 +52,15 @@ function generateAll(count) {
 			render();
 
 			const link = $('<button>More</button>');
-			section.div.after(link);
+			if (gen.sections.length === 1) {
+				section.div.parents('article').children('h1').append(link);
+			} else {
+				section.div.parents('section').children('h2').append(link);
+			}
 			link.click(() => {
-				section.div = $('<div class="colors"></div>');
-				link.before(section.div);
+				const newDiv = $('<div class="colors"></div>');
+				section.div.after(newDiv);
+				section.div = newDiv;
 				render();
 			});
 
