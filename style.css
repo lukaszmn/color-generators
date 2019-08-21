@@ -17,6 +17,8 @@ h1.title {
 	width: max-content;
 	margin: 0 auto;
 	padding: 13px 35px;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 article {
