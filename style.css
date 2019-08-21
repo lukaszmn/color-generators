@@ -21,6 +21,22 @@ h1.title {
 	box-sizing: border-box;
 }
 
+p.selector {
+	font-weight: bold;
+	color: steelblue;
+	text-align: center;
+}
+p.selector select {
+	border: 2px solid cornflowerblue;
+	border-radius: 3px;
+	padding: 5px 10px;
+	font-weight: bold;
+	color: royalblue;
+	font-size: 1.05em;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
 article {
 	border-bottom: 3px solid cadetblue;
 }
