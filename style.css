@@ -1,8 +1,13 @@
-div {
+.colors > div {
 	height: 20px;
 	width: 30px;
 	margin: 1px;
 	float: left;
+}
+.colors:after {
+	content: '';
+	display: block;
+	clear: both;
 }
 
 a {

@@ -13,17 +13,13 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
 
+	<script src="generators/01.js"></script>
+
 	<script>
 
 const count = 30;
 
-
-hr();
-title('https://stackoverflow.com/a/7638362');
-for (let i = 0; i < count; ++i) {
-	const color = '#'+Math.random().toString(16).substr(2,6);
-	div(color);
-}
+generateAll(count);
 
 
 hr();
