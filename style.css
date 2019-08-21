@@ -27,12 +27,17 @@ body:not(.waiting) #wait {
 	display: none;
 }
 
-p.selector {
+.selector {
 	font-weight: bold;
 	color: steelblue;
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-p.selector select {
+.selector div:first-child {
+	margin-right: 40px;
+}
+.selector select {
 	border: 2px solid cornflowerblue;
 	border-radius: 3px;
 	padding: 5px 10px;
@@ -41,6 +46,15 @@ p.selector select {
 	font-size: 1.05em;
 	margin-left: 10px;
 	cursor: pointer;
+}
+.selector a {
+	text-decoration: none;
+	cursor: pointer;
+	font-variant-caps: petite-caps;
+	margin: 0 4px;
+}
+.selector a.selected {
+	border-bottom: 2px solid cornflowerblue;
 }
 
 article {
@@ -65,17 +79,29 @@ section {
 .colors {
 	margin-bottom: 10px;
 }
-.colors > div {
-	height: 20px;
-	width: 30px;
-	margin: 1px;
-	float: left;
-}
 .colors:after {
 	content: '';
 	display: block;
 	clear: both;
 }
+
+.colors > div {
+	height: 20px;
+	width: 30px;
+	margin: 1px;
+	float: left;
+	transition: 0.5s cubic-bezier(0.6, 0, 0.4, 1);
+}
+body.samples-small .colors > div {
+	width: 10px;
+	height: 10px;
+}
+body.samples-large .colors > div {
+	width: 50px;
+	height: 60px;
+	margin-right: 2px;
+}
+
 
 p {
 	margin: 15px;

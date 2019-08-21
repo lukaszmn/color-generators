@@ -75,16 +75,33 @@ function generateAll(count, firstRun = false) {
 }
 
 $(document).ready(() => {
+	const $body = $('body');
+
 	const $samples = $('#color-samples');
 	$samples.change(function() {
 		const count = parseInt(this.value);
-		$('body').addClass('waiting');
+		$body.addClass('waiting');
 		// setTimeout to allow display #wait
 		setTimeout(() => generateAll(count), 100);
 	});
 
-	$('body').addClass('waiting');
+	$body.addClass('waiting');
 	const initialCount = parseInt($samples.val());
 	// setTimeout to allow display #wait
 	setTimeout(() => generateAll(initialCount, true), 100);
+
+
+	const $sizeLinks = $('.selector a');
+	$sizeLinks.click(function() {
+		const $this = $(this);
+
+		$sizeLinks.removeClass('selected');
+		$this.addClass('selected');
+
+		$sizeLinks.each(function() {
+			// `this` is item of `.each()`
+			$body.removeClass(this.id);
+		});
+		$body.addClass($this.attr('id'));
+	});
 });

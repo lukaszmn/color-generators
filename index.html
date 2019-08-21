@@ -17,15 +17,24 @@
 
 	<p id="wait">Patience, this page will take a while to load...</p>
 
-	<p class="selector">Amount of color samples:
-		<select id="color-samples">
-			<option value="5">5</option>
-			<option value="10" selected>10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-			<option value="50">50</option>
-		</select>
-	</p>
+	<div class="selector">
+		<div>
+			Amount of color samples:
+			<select id="color-samples">
+				<option value="5">5</option>
+				<option value="10" selected>10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+			</select>
+		</div>
+		<div>
+			Samples:
+			<a id="samples-small">Small</a>
+			<a id="samples-medium" class="selected">Medium</a>
+			<a id="samples-large">Large</a>
+		</div>
+	</div>
 
 	<!-- GitHub corner from http://tholman.com/github-corners/ -->
 	<a href="https://github.com/lukaszmn/color-generators" class="github-corner" aria-label="View source on GitHub">
