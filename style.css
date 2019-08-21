@@ -1,3 +1,25 @@
+* {
+	font-family: sans-serif;
+}
+
+article {
+	border-bottom: 3px solid cadetblue;
+}
+
+h1, h2 {
+	color: steelblue;
+}
+h2 {
+	font-size: 1.2em;
+}
+
+section {
+	margin-left: 15px;
+}
+
+.colors {
+	margin-bottom: 10px;
+}
 .colors > div {
 	height: 20px;
 	width: 30px;
@@ -10,13 +32,13 @@
 	clear: both;
 }
 
-a {
-	clear: left;
-	display: block;
-	margin-top: 1.5rem;
+p {
+	margin: 15px;
 }
 
-hr {
-	clear: left;
-	margin: 2rem 0 0;
+button {
+	margin: 15px 0;
+	background: cornflowerblue;
+	border: 1px solid blue;
+	padding: 5px 15px;
 }
