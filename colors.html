@@ -26,134 +26,14 @@
 	<script src="generators/11.js"></script>
 	<script src="generators/12.js"></script>
 	<script src="generators/13.js"></script>
+	<script src="generators/14.js"></script>
+	<script src="generators/15.js"></script>
+	<script src="generators/16.js"></script>
+	<script src="generators/17.js"></script>
 
 	<script>
-
-const count = 30;
-
-generateAll(count);
-
-
-
-hr();
-title('https://github.com/internalfx/distinct-colors');
-/* include: distinct-colors.min.js */
-const dcarr = [
-	[0, 100, 0, 100],
-	[0, 40, 60, 100],
-	[70, 100, 0, 100],
-	[0, 100, 0, 60],
-	[0, 100, 70, 100]
-];
-for (let dc of dcarr) {
-	subtitle(`chroma: ${dc[0]}-${dc[1]}, light: ${dc[2]}-${dc[3]}`);
-	const colors = new DistinctColors({
-		count,
-		chromaMin: dc[0],
-		chromaMax: dc[1],
-		lightMin: dc[2],
-		lightMax: dc[3]
-	});
-
-	for (let i = 0; i < count; ++i) {
-		const color = colors[i];
-		div(color);
-	}
-}
-
-
-hr();
-title('https://medialab.github.io/iwanthue/');
-/* include: https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js */
-/* include: https://medialab.github.io/iwanthue/js/libs/chroma.palette-gen.js */
-const iwharr = [
-	[0, 100, 0, 100, false],
-	[0, 40, 60, 100, false],
-	[70, 100, 0, 100, false],
-	[0, 100, 0, 60, false],
-	[0, 100, 70, 100, false],
-
-	[0, 100, 0, 100, true],
-	[0, 40, 60, 100, true],
-	[70, 100, 0, 100, true],
-	[0, 100, 0, 60, true],
-	[0, 100, 70, 100, true]
-];
-for (let iw of iwharr) {
-	subtitle(`chroma: ${iw[0]}-${iw[1]}, light: ${iw[2]}-${iw[3]}, fv: ${iw[4]}`);
-	let pg_colors = paletteGenerator.generate(
-		count, // Colors
-		function(color) { // This function filters valid colors
-			var hcl = color.hcl();
-			return hcl[0]>=0 && hcl[0]<=360
-				&& hcl[1]>=iw[0] && hcl[1]<=iw[1]
-				&& hcl[2]>=iw[2] && hcl[2]<=iw[3];
-		},
-		iw[4], // Using Force Vector instead of k-Means
-		50, // Steps (quality)
-		false, // Ultra precision
-		'Default' // Color distance type (colorblindness)
-	);
-	// Sort colors by differenciation first
-	pg_colors = paletteGenerator.diffSort(pg_colors, 'Default');
-	for (let i = 0; i < count; ++i) {
-		const color = pg_colors[i];
-		div(color);
-	}
-}
-
-
-hr();
-title('https://stackoverflow.com/a/17373688');
-function randomColorB(brightness){
-	function randomChannel(brightness){
-		var r = 255-brightness;
-		var n = 0|((Math.random() * r) + brightness);
-		var s = n.toString(16);
-		return (s.length==1) ? '0'+s : s;
-	}
-	return '#' + randomChannel(brightness) + randomChannel(brightness) + randomChannel(brightness);
-}
-const brightnesses = [0, 60, 128, 200];
-for (let brightness of brightnesses) {
-	subtitle(`Brightness: ${brightness}`);
-	for (let i = 0; i < count; ++i) {
-		const color = randomColorB(brightness);
-		div(color);
-	}
-}
-
-
-hr();
-title('https://github.com/davidmerfield/randomColor');
-const dmarr = [
-	['random', undefined],
-	['random', 'bright'],
-	['random', 'light'],
-	['random', 'dark'],
-
-	['monochrome', undefined],
-	['red', undefined],
-	['green', undefined],
-	['blue', undefined]
-];
-/* include https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js */
-for (let dm of dmarr) {
-	subtitle(`hue: ${dm[0]}, luminosity: ${dm[1]}`);
-	const dm_colors = randomColor({
-		count,
-		hue: dm[0],
-		luminosity: dm[1]
-	});
-	for (let i = 0; i < count; ++i) {
-		const color = dm_colors[i];
-		div(color);
-	}
-}
-
-hr();
-
-
+		const count = 30;
+		generateAll(count);
 	</script>
 
 </body>
