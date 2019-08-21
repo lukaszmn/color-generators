@@ -20,7 +20,7 @@ function addGenerator(id, link, title, description, getSections) {
 	const sections = getSections();
 	sections.forEach(section => {
 
-		const $section = $('<section> <div class="colors"></div> </section>');
+		const $section = $('<section> </section>');
 		$parent.append($section);
 
 		if (section.title) {
@@ -28,42 +28,61 @@ function addGenerator(id, link, title, description, getSections) {
 			$section.append($title);
 		}
 
-		const $colors = $('<div class="colors"></div>');
-		$section.append($colors);
-		section.div = $colors;
+		section.div = $section;
 	});
 
 	generators.push({link, description, sections});
 }
 
-function generateAll(count) {
+function generateAll(count, firstRun = false) {
 	generators.forEach(gen => {
 
 		gen.sections.forEach(section => {
 
-			const render = () => {
-				const colors = section.getColors(count, section.params);
+			// clear all
+			section.div.find('.colors').remove();
+
+			const render = count1 => {
+				
+				const $colors = $('<div class="colors"></div>');
+				section.div.append($colors);
+
+				const colors = section.getColors(count1, section.params);
 				colors.forEach(color => {
 					const colorDiv = $('<div>').css('background-color', color).attr('title', color);
-					section.div.append(colorDiv);
+					$colors.append(colorDiv);
 				});
 			};
 
-			render();
+			render(count);
 
-			const link = $('<button>More</button>');
-			if (gen.sections.length === 1) {
-				section.div.parents('article').children('h1').append(link);
-			} else {
-				section.div.parents('section').children('h2').append(link);
+			if (firstRun) {
+				const link = $('<button>More</button>');
+				if (gen.sections.length === 1) {
+					section.div.parents('article').children('h1').append(link);
+				} else {
+					section.div.children('h2').append(link);
+				}
+				link.click(() => {
+					const count1 = parseInt($('#color-samples').val());
+					render(count1);
+				});
 			}
-			link.click(() => {
-				const newDiv = $('<div class="colors"></div>');
-				section.div.after(newDiv);
-				section.div = newDiv;
-				render();
-			});
-
 		});
 	});
+
+	$('#wait').hide();
 }
+
+$(document).ready(() => {
+	const $samples = $('#color-samples');
+	$samples.change(function() {
+		const count = parseInt(this.value);
+		$('#wait').show();
+		// setTimeout to allow display #wait
+		setTimeout(() => generateAll(count));
+	});
+
+	const initialCount = parseInt($samples.val());
+	generateAll(initialCount, true);
+});

@@ -17,6 +17,16 @@
 
 	<p id="wait">Patience, this page will take a while to load...</p>
 
+	<p>Amount of color samples:
+		<select id="color-samples">
+			<option value="5">5</option>
+			<option value="10" selected>10</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+			<option value="50">50</option>
+		</select>
+	</p>
+
 	<!-- GitHub corner from http://tholman.com/github-corners/ -->
 	<a href="https://github.com/lukaszmn/color-generators" class="github-corner" aria-label="View source on GitHub">
 		<svg width="80" height="80" viewBox="0 0 250 250" style="fill:steelblue; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
@@ -53,12 +63,6 @@
 	<script src="generators/15.js"></script>
 	<script src="generators/16.js"></script>
 	<script src="generators/17.js"></script>
-
-	<script>
-		const count = 30;
-		generateAll(count);
-		$('#wait').hide();
-	</script>
 
 </body>
 </html>
