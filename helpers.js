@@ -71,18 +71,20 @@ function generateAll(count, firstRun = false) {
 		});
 	});
 
-	$('#wait').hide();
+	$('body').removeClass('waiting');
 }
 
 $(document).ready(() => {
 	const $samples = $('#color-samples');
 	$samples.change(function() {
 		const count = parseInt(this.value);
-		$('#wait').show();
+		$('body').addClass('waiting');
 		// setTimeout to allow display #wait
-		setTimeout(() => generateAll(count));
+		setTimeout(() => generateAll(count), 100);
 	});
 
+	$('body').addClass('waiting');
 	const initialCount = parseInt($samples.val());
-	generateAll(initialCount, true);
+	// setTimeout to allow display #wait
+	setTimeout(() => generateAll(initialCount, true), 100);
 });

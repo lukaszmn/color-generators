@@ -20,6 +20,12 @@ h1.title {
 	max-width: 100%;
 	box-sizing: border-box;
 }
+body.waiting * {
+	cursor: wait !important;
+}
+body:not(.waiting) #wait {
+	display: none;
+}
 
 p.selector {
 	font-weight: bold;
