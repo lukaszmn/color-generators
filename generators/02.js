@@ -1,7 +1,7 @@
 addGenerator('https://stackoverflow.com/a/7419630', 'Evenly spaced', `
 My goal was to create vibrant and distinct colors. To ensure the colors are distinct I avoid using a random generator and select "evenly spaced" colors from the rainbow.
 This is perfect for creating pop-out markers in Google Maps that have optimal "uniqueness" (that is, no two markers will have similar colors).`,
-(count, addColor) => {
+() => {
 
 	function rainbow(numOfSteps, step) {
 		// This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
@@ -23,8 +23,10 @@ This is perfect for creating pop-out markers in Google Maps that have optimal "u
 		var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
 		return (c);
 	}
-	for (let i = 0; i < count; ++i) {
-		const color = rainbow(count, i);
-		addColor(color);
-	}
+
+	return [{
+		getColors: (count, params) => {
+			return [...Array(count).keys()].map(i => rainbow(count, i));
+		}
+	}];
 });

@@ -1,5 +1,5 @@
 addGenerator('https://stackoverflow.com/a/7352887', 'With brightness control', ``,
-(count, addColor) => {
+() => {
 
 	function getRandColor(brightness) {
 		// Six levels of brightness from 0 to 5, 0 being the darkest
@@ -8,15 +8,18 @@ addGenerator('https://stackoverflow.com/a/7352887', 'With brightness control', `
 		var mixedrgb = [rgb[0] + mix[0], rgb[1] + mix[1], rgb[2] + mix[2]].map(function(x) { return Math.round(x/2.0)})
 		return "rgb(" + mixedrgb.join(",") + ")";
 	}
-	for (let br = 0; br < 6; ++br) {
-		subtitle('brightness: ' + br);
-		for (let i = 0; i < count; ++i) {
-			const color = getRandColor(br);
-			addColor(color);
-		}
-	}
-});
 
-/*
-addSection([br], params => )
-*/
+	const sections = [];
+	for (let br = 0; br < 6; ++br) {
+		sections.push({
+			title: `brightness: ${br}`,
+			params: [br],
+			getColors: (count, params) => {
+				const br = params[0];
+				return [...Array(count).keys()].map(i => getRandColor(br));
+			}
+		});
+	}
+
+	return sections;
+});
