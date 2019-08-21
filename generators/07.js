@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/43815463', 'Martin Ankerl\'s', ``,
+addGenerator('07', 'https://stackoverflow.com/a/43815463', 'Martin Ankerl\'s', ``,
 () => {
 
 	// adapted from

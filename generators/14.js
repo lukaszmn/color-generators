@@ -1,4 +1,4 @@
-addGenerator('https://github.com/internalfx/distinct-colors', 'Distinct Colors', null, () => {
+addGenerator('14', 'https://github.com/internalfx/distinct-colors', 'Distinct Colors', null, () => {
 
 	/* include: distinct-colors.min.js */
 

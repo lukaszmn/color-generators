@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/25873123', 'HSL', ``,
+addGenerator('04', 'https://stackoverflow.com/a/25873123', 'HSL', ``,
 () => {
 
 	function randomHsl(saturation, lightness) {

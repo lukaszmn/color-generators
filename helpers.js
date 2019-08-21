@@ -23,14 +23,15 @@ const generators = [];
 
 // getSections: () => section[]
 // section: { title, params, getColors(count, params) => colors[])) }
-function addGenerator(link, title, description, getSections) {
+function addGenerator(id, link, title, description, getSections) {
 	const descr = !description ? '' : `<p>${description.trim().replace(/\n/g, '<br/>')}</p>`;
 
 	const html = `
 		<article>
 			<h1>${title}</h1>
 			${descr}
-			<p>Source: <a href="${link}">${link}</a> </p>
+			<p>Author: <a href="${link}">${link}</a>,
+				Source code: <a href="generators/${id}.js">${id}.js</a> </p>
 		</article>`;
 	const $parent = $(html);
 	$('body').append($parent);

@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/3109564', 'Random with limited ranges', ``,
+addGenerator('06', 'https://stackoverflow.com/a/3109564', 'Random with limited ranges', ``,
 () => {
 
 	function generateColor(ranges) {

@@ -1,4 +1,4 @@
-addGenerator('https://github.com/davidmerfield/randomColor', 'Attractive random colors', null, () => {
+addGenerator('17', 'https://github.com/davidmerfield/randomColor', 'Attractive random colors', null, () => {
 
 	/* include https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js */
 

@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/31817723', 'Contrasting random colors', ``,
+addGenerator('10', 'https://stackoverflow.com/a/31817723', 'Contrasting random colors', ``,
 () => {
 
 	const generateRandomColors = function(number) {

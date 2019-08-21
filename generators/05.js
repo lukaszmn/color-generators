@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/2629539', 'Random with limited range: 6-D', ``,
+addGenerator('05', 'https://stackoverflow.com/a/2629539', 'Random with limited range: 6-D', ``,
 () => {
 
 	function get_random_color() {

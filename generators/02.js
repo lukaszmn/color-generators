@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/7419630', 'Evenly spaced', `
+addGenerator('02', 'https://stackoverflow.com/a/7419630', 'Evenly spaced', `
 My goal was to create vibrant and distinct colors. To ensure the colors are distinct I avoid using a random generator and select "evenly spaced" colors from the rainbow.
 This is perfect for creating pop-out markers in Google Maps that have optimal "uniqueness" (that is, no two markers will have similar colors).`,
 () => {

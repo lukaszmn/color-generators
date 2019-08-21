@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/10014969', 'Random from fixed jQuery.Color colors', ``,
+addGenerator('09', 'https://stackoverflow.com/a/10014969', 'Random from fixed jQuery.Color colors', ``,
 () => {
 
 	const Colors = {};

@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/52471602', 'SwitchColors', null, () => {
+addGenerator('13', 'https://stackoverflow.com/a/52471602', 'SwitchColors', null, () => {
 
 	function switchColors() {
 		var r, g, b, rg, gb, rb;

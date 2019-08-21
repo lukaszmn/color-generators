@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/30719083', 'Distinct HSV with parameters', `
+addGenerator('08', 'https://stackoverflow.com/a/30719083', 'Distinct HSV with parameters', `
 It attempts to generate colors as distinct as possible by finding which color out of 20 tries has the farthest euclidian distance from the others in the HSV cone
 It allows you to restrict the hue, saturation, or value range, but still attempts to pick colors as distinct as possible within that range.`,
 () => {

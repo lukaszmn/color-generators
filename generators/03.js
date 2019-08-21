@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/7352887', 'With brightness control', ``,
+addGenerator('03', 'https://stackoverflow.com/a/7352887', 'With brightness control', ``,
 () => {
 
 	function getRandColor(brightness) {

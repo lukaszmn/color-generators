@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/17373688', 'Random color with minimum brightness', null, () => {
+addGenerator('16', 'https://stackoverflow.com/a/17373688', 'Random color with minimum brightness', null, () => {
 
 	function randomColor(brightness) {
 		function randomChannel(brightness) {

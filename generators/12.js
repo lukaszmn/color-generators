@@ -1,4 +1,4 @@
-addGenerator('https://stackoverflow.com/a/10019872', 'HSL', ``,
+addGenerator('12', 'https://stackoverflow.com/a/10019872', 'HSL', ``,
 () => {
 
 	function RGB2Color(r, g, b) {

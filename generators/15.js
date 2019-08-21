@@ -1,4 +1,4 @@
-addGenerator('https://medialab.github.io/iwanthue/', 'i want hue - Colors for data scientists', null, () => {
+addGenerator('15', 'https://medialab.github.io/iwanthue/', 'i want hue - Colors for data scientists', null, () => {
 
 	/* include: https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js */
 
