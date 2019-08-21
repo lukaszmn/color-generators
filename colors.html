@@ -3,8 +3,14 @@
 	<script src="lib/jquery-latest.js"></script>
 	<script src="helpers.js"></script>
 	<link rel="stylesheet" href="style.css" />
+
+	<title>Collection of JavaScript color palettes generators</title>
 </head>
 <body>
+
+	<h1 class="title">Collection of JavaScript color palettes generators</h1>
+
+	<p id="wait">Patience, this page will take a while to load...</p>
 
 	<script src="lib/distinct-colors.min.js"></script>
 	
@@ -34,6 +40,7 @@
 	<script>
 		const count = 30;
 		generateAll(count);
+		$('#wait').hide();
 	</script>
 
 </body>
