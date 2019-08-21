@@ -69,7 +69,7 @@ function generateAll(count) {
 
 			render();
 
-			const link = $('<button>Again</button>');
+			const link = $('<button>More</button>');
 			section.div.after(link);
 			link.click(() => {
 				section.div = $('<div class="colors"></div>');
