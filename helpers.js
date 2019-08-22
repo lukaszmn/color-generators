@@ -44,7 +44,7 @@ function generateAll(count, firstRun = false) {
 
 			const render = count1 => {
 				
-				const $colors = $('<div class="colors"></div>');
+				const $colors = $('<div class="colors hidden"></div>');
 				section.div.append($colors);
 
 				const colors = section.getColors(count1, section.params);
@@ -52,6 +52,8 @@ function generateAll(count, firstRun = false) {
 					const colorDiv = $('<div>').css('background-color', color).attr('title', color);
 					$colors.append(colorDiv);
 				});
+
+				setTimeout(() => $colors.removeClass('hidden'), 200);
 			};
 
 			render(count);
