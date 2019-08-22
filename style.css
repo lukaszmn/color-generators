@@ -1,4 +1,4 @@
-* {
+body {
 	font-family: sans-serif;
 }
 
@@ -58,19 +58,26 @@ body:not(.waiting) #wait {
 }
 
 article {
+	margin: 0 10px;
 	border-bottom: 3px solid cadetblue;
 }
 
 h1, h2 {
 	color: steelblue;
+	font-weight: bold;
 }
 h1:not(.title), h2 {
 	display: flex;
 	align-items: center;
 }
+h1 {
+	font-size: 1.5em;
+	margin: 20px 0;
+}
 h2 {
 	font-size: 1.2em;
 	margin-top: 0; /* replaced h2 top margin to section's top padding to make smooth animation */
+	margin-bottom: 15px;
 }
 
 section {
