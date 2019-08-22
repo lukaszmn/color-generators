@@ -33,8 +33,13 @@ body:not(.waiting) #wait {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	border: 2px dotted steelblue;
+	padding: 10px 30px;
+	width: max-content;
+	margin: 0 auto 30px;
 }
-.selector div:not(:last-child) {
+.selector > div:not(:last-child) {
 	margin-right: 40px;
 }
 .selector select {
@@ -43,6 +48,7 @@ body:not(.waiting) #wait {
 	padding: 5px 10px;
 	font-weight: bold;
 	color: royalblue;
+	background: transparent; /* in Chrome Android it's gray */
 	font-size: 1.05em;
 	margin-left: 10px;
 	cursor: pointer;
@@ -183,4 +189,18 @@ body.verbosity-none h2 {
 }
 body.verbosity-none .colors {
 	  margin-bottom: 10px;
+}
+
+
+@media(max-width: 800px) {
+	h1.title {
+		padding: 0 20px;
+	}
+	.selector {
+		flex-direction: column;
+	}
+	.selector > div:not(:last-child) {
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
 }
