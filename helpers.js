@@ -92,18 +92,23 @@ $(document).ready(() => {
 	// setTimeout to allow display #wait
 	setTimeout(() => generateAll(initialCount, true), 100);
 
+	
+	$('.select-links').each(function() {
+		const $links = $(this).find('a');
+		const CLASS_SEL = 'selected';
 
-	const $sizeLinks = $('.selector a');
-	$sizeLinks.click(function() {
-		const $this = $(this);
+		$links.click(function() {
+			const $this = $(this);
 
-		$sizeLinks.removeClass('selected');
-		$this.addClass('selected');
+			$links.removeClass(CLASS_SEL);
+			$this.addClass(CLASS_SEL);
 
-		$sizeLinks.each(function() {
-			// `this` is item of `.each()`
-			$body.removeClass(this.id);
+			$links.each(function() {
+				// `this` is item of `.each()`
+				$body.removeClass(this.id);
+			});
+			$body.addClass($this.attr('id'));
 		});
-		$body.addClass($this.attr('id'));
 	});
+
 });

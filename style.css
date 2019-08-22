@@ -34,7 +34,7 @@ body:not(.waiting) #wait {
 	justify-content: center;
 	align-items: center;
 }
-.selector div:first-child {
+.selector div:not(:last-child) {
 	margin-right: 40px;
 }
 .selector select {
@@ -112,15 +112,6 @@ section {
 	opacity: 0.2;
 	transition: 1s ease;
 }
-body.samples-small .colors > div {
-	width: 10px;
-	height: 10px;
-}
-body.samples-large .colors > div {
-	width: 50px;
-	height: 60px;
-	margin-right: 2px;
-}
 
 
 p {
@@ -139,4 +130,57 @@ button {
 
 a {
 	color: steelblue;
+}
+
+
+body.samples-small .colors > div {
+	width: 10px;
+	height: 10px;
+}
+
+body.samples-large .colors > div {
+	width: 50px;
+	height: 60px;
+	margin-right: 2px;
+}
+
+
+body.verbosity-minimum h1:not(.title),
+body.verbosity-minimum h2 {
+	font-size: 75%;
+	margin: 0;
+	color: #aaa;
+	font-weight: normal;
+}
+body.verbosity-none p:not(#wait),
+body.verbosity-minimum p:not(#wait) {
+	display: none;
+}
+body.verbosity-none button,
+body.verbosity-minimum button {
+	transform: scale(0.8);
+	background: transparent;
+	border: none;
+	text-decoration: underline;
+	color: inherit;
+}
+body.verbosity-none article,
+body.verbosity-minimum article {
+	border: 0;
+}
+body.verbosity-none section,
+body.verbosity-minimum section {
+	padding: 0;
+}
+body.verbosity-minimum .colors {
+	margin-bottom: 0;
+}
+
+
+body.verbosity-none h1:not(.title),
+body.verbosity-none h2 {
+	display: none !important;
+}
+body.verbosity-none .colors {
+	  margin-bottom: 10px;
 }
