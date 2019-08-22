@@ -15,7 +15,7 @@ h1.title {
 	text-align: center;
 	border: 2px dotted darkgray;
 	width: max-content;
-	margin: 0 auto;
+	margin: 0 auto 20px;
 	padding: 13px 35px;
 	max-width: 100%;
 	box-sizing: border-box;
@@ -97,6 +97,7 @@ section {
 		height 0.5s cubic-bezier(0.6, 0, 0.4, 1),
 		opacity 1s ease,
 		margin 1s ease;
+	cursor: help;
 }
 .colors.hidden > div {
 	margin-top: -30px;
