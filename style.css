@@ -10,10 +10,10 @@ h1.title {
 }
 
 #wait {
-	color: darkgray;
+	color: #f6ab20;
 	font-size: 1.5em;
 	text-align: center;
-	border: 2px dotted darkgray;
+	border: 2px dotted #f6ab20;
 	width: max-content;
 	margin: 0 auto 20px;
 	padding: 13px 35px;
@@ -89,6 +89,10 @@ h2 {
 section {
 	margin-left: 15px;
 	padding-top: 15px; /* replaced h2 top margin to section's top padding to make smooth animation */
+}
+
+article, h1, p {
+	transition: 1s ease;
 }
 
 .colors {

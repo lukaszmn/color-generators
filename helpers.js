@@ -16,7 +16,7 @@ function addGenerator(id, link, title, description, getSections) {
 		</article>`;
 	const $parent = $(html);
 	$('body').append($parent);
-	
+
 	const sections = getSections();
 	sections.forEach(section => {
 
@@ -43,13 +43,16 @@ function generateAll(count, firstRun = false) {
 			section.div.find('.colors').remove();
 
 			const render = count1 => {
-				
+
 				const $colors = $('<div class="colors hidden"></div>');
 				section.div.append($colors);
 
 				const colors = section.getColors(count1, section.params);
 				colors.forEach(color => {
-					const colorDiv = $('<div>').css('background-color', color).attr('title', color);
+					const colorDiv = $('<div>')
+						.css('background-color', color)
+						.attr('title', 'Color:\n' + color + '\nClick to copy')
+						.attr('onclick', 'clip("' + color + '")');
 					$colors.append(colorDiv);
 				});
 
@@ -92,7 +95,7 @@ $(document).ready(() => {
 	// setTimeout to allow display #wait
 	setTimeout(() => generateAll(initialCount, true), 100);
 
-	
+
 	$('.select-links').each(function() {
 		const $links = $(this).find('a');
 		const CLASS_SEL = 'selected';
@@ -112,3 +115,15 @@ $(document).ready(() => {
 	});
 
 });
+
+function clip(color) {
+	console.log('CLIP ' + color);
+	const $temp = $('<input>');
+	$('body').append($temp);
+	$temp.val(color).select();
+	$temp.select();
+	$temp[0].setSelectionRange(0, 99999); // For mobile devices
+	navigator.clipboard.writeText($temp.val());
+	$temp.remove();
+	showToast('Copied.');
+}
